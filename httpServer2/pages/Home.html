@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/Navbar.css">
+</head>
+
+<body>
+    <nav>
+        <div class="logo">Logo</div>
+        <div class="links">
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/products">Products</a>
+        </div>
+    </nav>
+    <h1>This is Home page</h1>
+
+    <img src="/wallpaper" alt="wall" height="300px" width="800px">
+
+    <button id="get">GET DATA</button>
+    <button id="send">SEND DATA</button>
+    <script>
+        const getBtn = document.getElementById("get")
+        const sendBtn = document.getElementById("send")
+
+        getBtn.addEventListener("click", async () => {
+            const response = await fetch("/getdata") //GET
+            const data = await response.json()
+            console.log(data)
+        })
+
+        sendBtn.addEventListener("click", () => {
+            let animals = ["dog", "cat", "cow"]
+            fetch("/senddata", {
+                method: "POST", //http method
+                headers: { "content-type": "application/json" },//additional infos
+                body: JSON.stringify(animals) //payload
+            }).then(res => res.json())
+                .then(data => console.log(data))
+                .catch(error => console.log(error))
+        })
+
+    </script>
+</body>
+
+</html>

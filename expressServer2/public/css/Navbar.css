@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+nav {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: black;
+  color: white;
+}
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.links {
+  width: 40%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.links > a {
+  color: white;
+  text-decoration: none;
+  font-size: 22px;
+}

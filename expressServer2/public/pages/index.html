@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/Navbar.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body>
+    <nav>
+        <div class="logo">Express</div>
+        <div class="links">
+            <a href="/">Home</a>
+            <a href="/pages/About.html">About</a>
+            <a href="/pages/Contact.html">Contact</a>
+            <a href="/pages/Login.html">Login</a>
+        </div>
+    </nav>
+    <h1>Home page code</h1>
+
+    <button id="get">Get Data</button>
+    <button id="post">Post Data</button>
+    <script>
+        let getBtn = document.getElementById("get")
+
+        getBtn.addEventListener("click", () => {
+            fetch("/getdata").then(res => res.json())
+                .then(data => console.log(data))
+                .catch(err => console.log(err))
+        })
+
+        document.getElementById("post")
+            .addEventListener("click", async () => {
+                let student = { name: "Suresh", age: 34 }
+                let response = await fetch("/postdata", {
+                    method: "POST",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify(student)
+                })
+                let data = await response.json()
+                console.log(data)
+            })
+    </script>
+</body>
+
+</html>

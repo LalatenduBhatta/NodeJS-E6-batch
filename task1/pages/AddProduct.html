@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Add Your Product</h1>
+
+    <form id="addProduct">
+        <label for="name">Product name</label>
+        <input type="text" id="name" required> <br>
+        <label for="category">Product Category</label>
+        <input type="text" id="category" required> <br>
+        <label for="quantity">Product Quantity</label>
+        <input type="text" id="quantity" required> <br>
+        <button type="submit">ADD</button>
+    </form>
+
+    <script>
+        const form = document.getElementById("addProduct")
+        const productDetails = {}
+        form.addEventListener("input", (event) => {
+            const value = event.target.value
+            const id = event.target.id
+            productDetails[id] = value
+        })
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault()
+            //post the data to server
+            fetch("/add", {
+                method: "POST",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify(productDetails)
+            }).then((response) => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.log(error))
+        })
+    </script>
+</body>
+
+</html>
