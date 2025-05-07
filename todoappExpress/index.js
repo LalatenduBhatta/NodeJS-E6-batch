@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 
 //read tasks
 app.get("/alltasks", (req, res) => {
-    let allTasks = JSON.stringify(fs.readFileSync("./db/tasks.json"))
+    let allTasks = JSON.parse(fs.readFileSync("./db/tasks.json"))
     res.send(allTasks)
 })
 

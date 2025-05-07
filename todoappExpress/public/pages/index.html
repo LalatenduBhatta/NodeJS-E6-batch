@@ -16,20 +16,38 @@
         <button class="btn btn-success p-3 fs-3 ">ADD TASK</button>
     </a>
     <div class="container mt-4 text-dark">
-        <div class="row">
-            <div class="col-12 bg-light p-2 d-flex align-items-center justify-content-between m-2">
+        <div class="row" id="display">
+
+        </div>
+    </div>
+
+    <script>
+        //fetch all the tasks from server
+        fetchTasks()
+
+        async function fetchTasks() {
+            const response = await fetch("/alltasks")
+            const data = await response.json()
+            console.log(data)
+            displayTasks(data)
+        }
+        function displayTasks(tasks) {
+            let str = ""
+            for (let i = 0; i < tasks.length; i++) {
+                str += ` <div class="col-12 bg-light p-2 d-flex align-items-center justify-content-between m-2">
                 <div class="body">
-                    <div class="title fs-3 ">TITLE</div>
-                    <div class="desc fs-5">hello world this is the description</div>
+                    <div class="title fs-2 fw-bold ">${tasks[i].taskTitle}</div>
+                    <div class="desc fs-5">${tasks[i].taskDesc}</div>
                 </div>
                 <div class="actions">
                     <button class="btn btn-danger me-2">DELETE</button>
                     <button class="btn btn-primary me-2">EDIT</button>
                 </div>
-            </div>
-        </div>
-    </div>
-
+            </div>`
+            }
+            document.getElementById("display").innerHTML = str
+        }
+    </script>
 </body>
 
 </html>
