@@ -36,6 +36,18 @@ app.post("/addtask", (req, res) => {
     }
 })
 
+app.delete("/deletetask", (req, res) => {
+    let { id } = req.body
+    if (id) {
+        let allTasks = JSON.parse(fs.readFileSync("./db/tasks.json"))
+        let remainingTasks = allTasks.filter(task => task.id !== id)
+        //update the json file
+        fs.writeFileSync("./db/tasks.json", JSON.stringify(remainingTasks))
+        res.status(200).send(remainingTasks)
+    } else {
+        res.status(400).send({ error: "Provide the id" })
+    }
+})
 
 app.listen(4050, () => {
     console.log("server running in http://localhost:4050")
